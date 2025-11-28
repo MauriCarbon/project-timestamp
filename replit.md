@@ -29,9 +29,16 @@ This is a FreeCodeCamp Timestamp Microservice project built with Node.js and Exp
 ## API Endpoints
 - `GET /` - Serves the HTML documentation page
 - `GET /api/hello` - Example API endpoint
-- `GET /api/:date?` - Timestamp conversion endpoint (to be implemented)
+- `GET /api/:date?` - Timestamp conversion endpoint
+  - Accepts date strings (e.g., "2015-12-25") or Unix timestamps in milliseconds
+  - Returns `{ unix: <timestamp>, utc: "<date string>" }`
+  - Empty parameter returns current time
+  - Invalid dates return `{ error: "Invalid Date" }`
 
 ## Recent Changes
+- **2025-11-28**: Implemented timestamp API endpoint
+  - Added /api/:date? route with full FCC test compliance
+  - Handles date strings, Unix timestamps, empty params, and invalid dates
 - **2025-11-28**: Initial Replit setup
   - Modified index.js to bind to 0.0.0.0:5000 for Replit environment
   - Configured Express Server workflow

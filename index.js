@@ -24,7 +24,28 @@ app.get("/api/hello", function (req, res) {
   res.json({greeting: 'hello API'});
 });
 
+// Timestamp API endpoint
+app.get("/api/:date?", function (req, res) {
+  var dateParam = req.params.date;
+  var targetDate;
 
+  if (!dateParam) {
+    targetDate = new Date();
+  } else if (/^-?\d+$/.test(dateParam)) {
+    targetDate = new Date(Number(dateParam));
+  } else {
+    targetDate = new Date(dateParam);
+  }
+
+  if (isNaN(targetDate.getTime())) {
+    return res.json({ error: "Invalid Date" });
+  }
+
+  res.json({
+    unix: targetDate.getTime(),
+    utc: targetDate.toUTCString()
+  });
+});
 
 // Listen on port set in environment variable or default to 5000
 // Bind to 0.0.0.0 to work in Replit environment
